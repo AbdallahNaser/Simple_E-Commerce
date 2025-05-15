@@ -1,22 +1,12 @@
 {% extends 'appdashboard.html' %}
 
-{% block title %}Products{% endblock %}
-{% block header %}Product List{% endblock %}
-
+{% block title %}Single Product{% endblock %}
+{% block header %}Product Details{% endblock %}
 
 {% block content %}
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">All Products</h3>
-        <div class="card-tools">
-            <a href="{% url 'product:product_add' %}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Add New Product
-            </a>
-        </div>
-    </div>
-    <div class="card-body">
-        {% if products %}
-        <div class="table-responsive">
+    <h3>Single Product</h3>
+    <p>This is the product Details </p>
+<div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -31,7 +21,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for product in products %}
                     <tr>
                         <td>{{ product.id }}</td>
                         <td>{{ product.name }}</td>
@@ -55,15 +44,7 @@
                             </a>
                         </td>
                     </tr>
-                    {% endfor %}
                 </tbody>
             </table>
         </div>
-        {% else %}
-        <div class="alert alert-info">
-            No categories found. <a href="{% url 'product:product_add' %}">Add your first product</a>.
-        </div>
-        {% endif %}
-    </div>
-</div>
 {% endblock %}

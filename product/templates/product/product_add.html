@@ -1,0 +1,34 @@
+{% extends 'appdashboard.html' %}
+
+{% block title %}add product{% endblock %}
+{% block header %}Add product{% endblock %}
+
+{% block content %}
+    <h3>Add Product</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="product_name" placeholder="Product Name">
+                <br>
+        <input type="text" name="description" placeholder="Description">
+                <br>
+        <input type="file" name="product_image" placeholder="Image">
+                <br>
+
+        <input type="number" name="price" placeholder="Price">
+                <br>
+
+        <input type="number" name="stock" placeholder="Stock">
+                <br>
+
+        <select name="category_id">
+            {%for category in categories%}
+            <option value="{{category.id}}">{{category.name}}</option>
+            {%endfor%}
+
+        </select>
+                <br>
+
+        <button type="submit">Add Product</button>
+
+    </form>
+{% endblock %}

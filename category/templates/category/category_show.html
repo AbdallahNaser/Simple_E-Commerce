@@ -1,22 +1,12 @@
 {% extends 'appdashboard.html' %}
 
-{% block title %}Categories{% endblock %}
-{% block header %}Category List{% endblock %}
+{% block title %}single category {% endblock %}
+{% block header %}details of single category{% endblock %}
 
 {% block content %}
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">All Categories</h3>
-        <div class="card-tools">
-            <a href="{% url 'category:category_add' %}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Add New Category
-            </a>
-        </div>
-    </div>
-    <div class="card-body">
-        {% if categories %}
-        <div class="table-responsive">
-            <table class="table table-hover">
+    <h3>category details :</h3>
+    <p>This is the category details page that show every thin thing about category.</p>
+<table class="table table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -26,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for category in categories %}
+
                     <tr>
                         <td>{{ category.id }}</td>
                         <td>{{ category.name }}</td>
@@ -46,15 +36,6 @@
                             </a>
                         </td>
                     </tr>
-                    {% endfor %}
                 </tbody>
             </table>
-        </div>
-        {% else %}
-        <div class="alert alert-info">
-            No categories found. <a href="{% url 'category:category_add' %}">Add your first category</a>.
-        </div>
-        {% endif %}
-    </div>
-</div>
 {% endblock %}

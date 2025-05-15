@@ -1,0 +1,15 @@
+{% extends 'appdashboard.html' %}
+
+{% block title %}add single category {% endblock %}
+{% block header %}add single category{% endblock %}
+
+{% block content %}
+    <h3>category form :</h3>
+    <form method="post" >
+        {%csrf_token%}
+        <input type="text" name="category_name" placeholder="Category Name">
+        <input type="text" name="category_description" placeholder="Category Description">
+        <button type="submit">ADD Category</button>
+
+    </form>
+{% endblock %}

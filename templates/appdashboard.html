@@ -38,10 +38,10 @@
 <body>
     <div class="sidebar">
         <h4 class="text-center">MyShop</h4>
-        <a href="#">Dashboard</a>
-        <a href="{% url 'products' %}">Products</a>
-        <a href="#">Orders</a>
-        <a href="#">Customers</a>
+        <a href="{% url 'product:product_list' %}">Products</a>
+        <a href="{% url 'product:product_add' %}">New Product</a>
+        <a href="{% url 'category:category_list' %}">Categories</a>
+        <a href="{% url 'category:category_add' %}">New Category</a>
     </div>
     <div class="flex-grow-1">
         <div class="top-header">

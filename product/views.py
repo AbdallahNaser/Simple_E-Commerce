@@ -1,4 +1,42 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from category.models import Category
+from product.models import Product
+
 
 def product_list(request):
-    return render(request, 'product/product_list.html')
+    context={'products':Product.get_all_products()}
+    return render(request, 'product/product_list.html',context)
+def product_details(request,id):
+    context = {'product': Product.get_single_product(id)}
+    return render(request, 'product/product_details.html', context)
+def product_delete(request,id):
+    Product.delete_single_product(id)
+    return redirect('product:product_list')
+
+def product_add(request):
+    context={'categories':Category.getall()}
+    if(request.method=='POST'):
+        name = request.POST.get('product_name')
+        description = request.POST.get('description', '')
+        price = request.POST.get('price')
+        stock = request.POST.get('stock')
+        category_id = request.POST.get('category_id')
+        category = Category.objects.get(id=category_id)
+        status = request.POST.get('status', 'true') == 'true'
+        image=request.FILES['product_image']
+
+        Product.objects.create(
+            name=name,
+            description=description,
+            price=price,
+            stock=stock,
+            image=image,
+            category_id=category.id,
+            status=status,
+        publish_date="2025-11-11"
+        )
+        return redirect('product:product_list')
+
+    return render(request,'product/product_add.html', context)
+
+

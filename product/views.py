@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from category.models import Category
 from product.models import Product
 
+from .forms import ProductFormModel
+
 
 def product_list(request):
     context={'products':Product.get_all_products()}
@@ -13,8 +15,24 @@ def product_delete(request,id):
     Product.delete_single_product(id)
     return redirect('product:product_list')
 
+
 def product_add(request):
-    context={'categories':Category.getall()}
+    if request.method == 'POST':
+        form = ProductFormModel(request.POST, request.FILES)
+        if form.is_bound and form.is_valid():
+            form.save()
+            return redirect('product:product_list')
+    else:
+        form = ProductFormModel()
+    context = {'AddProduct': form,'categories':Category.getall()}
+
+    return render(request, 'product/product_add.html', context)
+''' 
+def product_add2(request):
+    productForm=ProductFormModel
+    context={'categories':Category.getall(),'AddProduct':productForm}
+
+
     if(request.method=='POST'):
         name = request.POST.get('product_name')
         description = request.POST.get('description', '')
@@ -39,4 +57,4 @@ def product_add(request):
 
     return render(request,'product/product_add.html', context)
 
-
+'''

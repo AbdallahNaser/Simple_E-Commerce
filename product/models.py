@@ -11,7 +11,7 @@ class Product(models.Model):
     price=models.BigIntegerField(null=False)
     stock=models.BigIntegerField(null=False)
     image=models.ImageField(upload_to='{%static%}/imgs',blank=True,null=True)
-    publish_date=models.DateField()
+    publish_date = models.DateField(auto_now_add=True)
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE)
     status = models.BooleanField(default=True)
 

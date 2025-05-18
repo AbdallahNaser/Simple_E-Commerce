@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from category.models import Category
 from product.models import Product
 
-from .forms import ProductFormModel
+from .forms import *
 
 
 def product_list(request):
@@ -27,6 +27,37 @@ def product_add(request):
     context = {'AddProduct': form,'categories':Category.getall()}
 
     return render(request, 'product/product_add.html', context)
+
+
+
+def product_edit(request,id):
+    product=Product.get_single_product(id)
+    if request.method == 'POST':
+        form = ProductFormUpdate(request.POST, request.FILES)
+        if form.is_bound and form.is_valid():
+            product.name = form.cleaned_data['name']
+            product.description = form.cleaned_data['description']
+            product.price = form.cleaned_data['price']
+            product.stock = form.cleaned_data['stock']
+            product.category = form.cleaned_data['category']
+            if form.cleaned_data['image']:
+                product.image = form.cleaned_data['image']
+                product.save()
+                return redirect('product:product_list')
+    else:
+        form = ProductFormUpdate(initial={
+            'name': product.name,
+            'description': product.description,
+            'price': product.price,
+            'stock': product.stock,
+            'category': product.category,
+        })
+    context = {'editProduct': form,'categories':Category.getall()}
+
+
+    return render(request, 'product/product_edit.html', context)
+
+
 ''' 
 def product_add2(request):
     productForm=ProductFormModel

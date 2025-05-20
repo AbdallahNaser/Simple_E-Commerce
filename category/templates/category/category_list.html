@@ -44,6 +44,9 @@
                             <a href="{% url 'category:category_delete' category.id %}" class="btn btn-sm btn-danger">
                                 <i class="fas fa-trash"></i> Delete
                             </a>
+                             <a href="{% url 'category:category_update' category.id %}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i> Update
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

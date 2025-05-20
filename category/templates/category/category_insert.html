@@ -6,10 +6,9 @@
 {% block content %}
     <h3>category form :</h3>
     <form method="post" >
-        {%csrf_token%}
-        <input type="text" name="category_name" placeholder="Category Name">
-        <input type="text" name="category_description" placeholder="Category Description">
-        <button type="submit">ADD Category</button>
+         {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">add category</button>
 
     </form>
 {% endblock %}

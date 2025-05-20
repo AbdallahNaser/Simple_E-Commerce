@@ -1,0 +1,16 @@
+{% extends 'appdashboard.html' %}
+
+{% block title %} confirm delete {% endblock %}
+{% block header %}confirm delete{% endblock %}
+
+{% block content %}
+    <h3>category confirm delete :</h3>
+<form method="post" action="{% url 'category:category_delete' category.pk %}" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger"
+            onclick="return confirm('Delete {{ category.name }} permanently?')">
+        Delete
+    </button>
+</form>
+
+{% endblock %}

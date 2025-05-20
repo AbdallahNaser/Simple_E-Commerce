@@ -11,4 +11,5 @@ urlpatterns = [
     path('', CategoryList.as_view()),
     path('product/', include('product.urls')),
     path('category/', include('category.urls')),
+    path('account/', include('account.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

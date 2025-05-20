@@ -26,5 +26,6 @@ class Product(models.Model):
     @classmethod
     def delete_single_product(cls,id):
         product = cls.objects.get(id=id)
-        product.delete()
-        return True, "Product deleted successfully"
+        product.status = False
+        product.save()
+        return "Product deleted successfully"

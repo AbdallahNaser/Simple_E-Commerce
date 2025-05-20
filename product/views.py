@@ -1,8 +1,22 @@
 from django.shortcuts import render,redirect
 from category.models import Category
 from product.models import Product
+from django.views import View
 
 from .forms import *
+
+
+
+class product(View):
+    def get(self,request):
+        context = {'products': Product.get_all_products()}
+        return render(request, 'product/product_list.html', context)
+class productdelete(View):
+    def post(self,request,id):
+        Product.delete_single_product(id)
+        return redirect('product:product_list')
+
+
 
 
 def product_list(request):
@@ -11,10 +25,12 @@ def product_list(request):
 def product_details(request,id):
     context = {'product': Product.get_single_product(id)}
     return render(request, 'product/product_details.html', context)
+
+'''
 def product_delete(request,id):
     Product.delete_single_product(id)
     return redirect('product:product_list')
-
+'''
 
 def product_add(request):
     if request.method == 'POST':
